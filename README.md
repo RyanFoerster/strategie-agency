@@ -10,6 +10,7 @@ Stack: **Astro** · **GSAP** (ScrollTrigger, SplitText) · **Lenis** smooth scro
 npm install
 npm run dev        # http://localhost:4321
 npm run build      # static build in dist/
+npm run deploy     # build + deploy to Cloudflare (wrangler.jsonc)
 ```
 
 Add `?nointro` to the URL to skip the intro. The demo bar at the top switches
