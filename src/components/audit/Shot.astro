@@ -1,0 +1,41 @@
+---
+// A capture in a small browser window, with numbered pins and their legend.
+import type { Shot } from '../../data/audit';
+
+interface Props {
+  shot: Shot;
+  tone: 'now' | 'fix';
+}
+const { shot, tone } = Astro.props;
+---
+
+<figure class:list={['a-shot', `a-shot--${tone}`]} data-shot>
+  <div class="a-shot__stage">
+    <div class="a-shot__win">
+      <div class="a-shot__bar"><i></i><i></i><i></i><span>{shot.url}</span></div>
+      <div class="a-shot__view">
+        <img src={shot.img} alt={shot.alt} width="1440" height="900" loading="lazy" decoding="async" />
+        {
+          shot.pins.map((p, i) => (
+            <span class="a-pin" style={`left:${p.x}%;top:${p.y}%;--i:${i}`} data-pin={i} aria-hidden="true">
+              {i + 1}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+    <slot />
+  </div>
+  <figcaption>
+    <ol class="a-legend">
+      {
+        shot.pins.map((p, i) => (
+          <li data-pin={i}>
+            <b>{i + 1}</b>
+            <span>{p.t}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </figcaption>
+</figure>

@@ -6,16 +6,18 @@ import VersionSwitch from '../components/VersionSwitch.astro';
 interface Props {
   title?: string;
   description?: string;
+  lang?: string;
 }
 
 const {
   title = 'strategie agency — we connect, you grow',
   description = 'Independent branding & communication agency. Creative homepage prototype.',
+  lang = 'en',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="is-loading">
+<html lang={lang} class="is-loading">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

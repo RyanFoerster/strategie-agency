@@ -23,6 +23,7 @@ between the three versions and between the two project transitions, **wave** and
 | `/v2` | **v2 dashboard**: sticky "root system" project index + big media panel |
 | `/v3` | **v3 connect**: v1's structure with the "we connect, you grow" signature |
 | `/v4` | **v4 stratai**: the StratAI robot is the hero, big, and reacts to what you ask |
+| `/audit` | **audit**: what the UI/UX audit points at on the current site (captures with numbered pins) next to our answer in the prototypes; content in `src/data/audit.ts`, captures in `public/audit/` (taken 12.11.2026) |
 
 ## v4: StratAI
 
@@ -102,6 +103,7 @@ src/
   pages/index.astro         v1
   pages/v2.astro            v2
   pages/v3.astro            v3
+  pages/audit.astro         audit: current site vs prototypes
   data/site.ts              cases, full portfolio, media, studio info
   components/*.astro        v1 sections + shared pieces (thread, play ring, ask, demo bar)
   components/v2/*.astro     v2 sidebar, hero, widgets

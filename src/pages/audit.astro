@@ -1,0 +1,251 @@
+---
+// The audit, shown: what we point at on the current site, and our answer in the prototypes.
+import Base from '../layouts/Base.astro';
+import Shot from '../components/audit/Shot.astro';
+import '../styles/audit.css';
+import { keep, stats, firstScreens, findings, todo, goals } from '../data/audit';
+
+const versions = [
+  { href: '/', label: 'v1 showreel' },
+  { href: '/v2', label: 'v2 dashboard' },
+  { href: '/v3', label: 'v3 connect' },
+  { href: '/v4', label: 'v4 stratai' },
+];
+---
+
+<Base
+  lang="fr"
+  title="audit ui/ux — strategie agency"
+  description="Ce que l’audit pointe sur le site actuel de strategie agency, et la réponse proposée dans les prototypes."
+>
+  <main class="audit">
+    <header class="a-hero">
+      <div data-rv>
+        <p class="eyebrow small"><span class="dot"></span>audit ui/ux · rapport n°001 · 12.11.2026</p>
+        <h1 class="h1">remettre vos projets <span class="grad-text">au centre.</span></h1>
+      </div>
+      <p class="lead a-hero__lead" data-rv>
+        Votre site repose sur une identité forte et un portefeuille de marques remarquable, mais il montre trop tard ce
+        que vous faites de mieux&nbsp;: vos projets.
+      </p>
+
+      <ul class="a-stats">
+        {
+          stats.map((s) => (
+            <li class="a-stat" data-rv>
+              <p class="a-stat__v">
+                {s.v}
+                <small>{s.unit}</small>
+              </p>
+              <p>{s.t}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="a-keep" data-rv>
+        <span class="small mute">ce qu’on garde</span>
+        {keep.map((k) => <span class="a-chip">{k}</span>)}
+      </div>
+      <p class="a-how small" data-rv>
+        <span class="a-tag a-tag--now">aujourd’hui</span> votre site, capturé le 12 novembre 2026.
+        <span class="a-tag a-tag--fix">notre proposition</span> la réponse dans les prototypes, à ouvrir en live.
+      </p>
+    </header>
+
+    <!-- 01: screen by screen -->
+    <article class="a-case">
+      <header class="a-case__head" data-rv>
+        <p class="a-case__n"><b>01</b><span>accueil</span></p>
+        <h2 class="a-case__title">Le premier projet arrive au quatrième écran.</h2>
+        <div class="a-case__why">
+          <p class="small mute">pourquoi c’est important</p>
+          <p>
+            Un prospect juge une agence créative en quelques secondes, sur ses réalisations. La page s’ouvre sur une
+            vague abstraite, et chaque écran défilé fait perdre des visiteurs.
+          </p>
+        </div>
+      </header>
+
+      <div class="a-strip a-strip--now" data-rv>
+        <p class="a-strip__tag"><span class="a-tag a-tag--now">aujourd’hui</span><span class="small mute">strategie.agency/en, écran par écran</span></p>
+        {
+          firstScreens.now.map((s, i) => (
+            <figure class:list={['a-screen', { 'is-hit': s.hit }]}>
+              <div class="a-screen__img">
+                <img src={s.img} alt={`Accueil actuel, écran ${i + 1} : ${s.label}.`} width="720" height="450" loading="lazy" decoding="async" />
+                {s.hit && <span class="a-flag">premier projet</span>}
+              </div>
+              <figcaption>
+                <b class="tnum">écran {i + 1}</b>
+                <span>{s.label}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <div class="a-strip a-strip--fix" data-rv>
+        <div class="a-strip__text">
+          <p><span class="a-tag a-tag--fix">notre proposition</span></p>
+          <p class="a-fix">
+            L’accueil devient un showreel plein écran. Le slogan reste, les cas sont là dès l’ouverture en vignettes, et
+            le premier défilement affiche un projet.
+          </p>
+          <a class="a-live" href="/?nointro"><span class="u">voir en live&nbsp;: v1 showreel</span><i>→</i></a>
+        </div>
+        {
+          firstScreens.fix.map((s, i) => (
+            <figure class:list={['a-screen', { 'is-hit': s.hit }]}>
+              <div class="a-screen__img">
+                <img src={s.img} alt={`Prototype v1, écran ${i + 1} : ${s.label}.`} width="1440" height="900" loading="lazy" decoding="async" />
+                {s.hit && <span class="a-flag">premier projet</span>}
+              </div>
+              <figcaption>
+                <b class="tnum">{i === 0 ? 'écran 1' : 'premier défilement'}</b>
+                <span>{s.label}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </article>
+
+    {
+      findings.map((f) => (
+        <article class="a-case">
+          <header class="a-case__head" data-rv>
+            <p class="a-case__n">
+              <b>{f.n}</b>
+              <span>{f.zone}</span>
+            </p>
+            <h2 class="a-case__title">{f.title}</h2>
+            <div class="a-case__why">
+              <p class="small mute">pourquoi c’est important</p>
+              <p>{f.why}</p>
+            </div>
+          </header>
+
+          <div class="a-case__cols">
+            <div class="a-case__col" data-rv>
+              <p>
+                <span class="a-tag a-tag--now">aujourd’hui</span>
+              </p>
+              <Shot shot={f.now} tone="now">
+                {f.wall && (
+                  <div class="a-wall">
+                    <img src={f.wall.img} alt="La page Work actuelle en entier, en miniature." loading="lazy" decoding="async" />
+                    <span>{f.wall.label}</span>
+                  </div>
+                )}
+              </Shot>
+            </div>
+            <div class="a-case__col" data-rv>
+              <p>
+                <span class="a-tag a-tag--fix">notre proposition</span>
+              </p>
+              <Shot shot={f.fix.shot} tone="fix" />
+              <p class="a-fix">{f.fix.text}</p>
+              {f.fix.note && <p class="a-note small">{f.fix.note}</p>}
+              <a class="a-live" href={f.fix.live.href}>
+                <span class="u">{f.fix.live.label}</span>
+                <i>→</i>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+
+    <section class="a-end">
+      <header class="a-end__head" data-rv>
+        <p class="eyebrow small"><span class="dot"></span>où on en est</p>
+        <h2 class="h1">ce que le prototype <span class="grad-text">règle déjà</span>, et ce qui reste.</h2>
+      </header>
+
+      <div class="a-goals" data-rv role="table" aria-label="Indicateurs de réussite">
+        <div class="a-goals__row a-goals__row--head small mute" role="row">
+          <span role="columnheader">indicateur</span>
+          <span role="columnheader">aujourd’hui</span>
+          <span role="columnheader">objectif de l’audit</span>
+          <span role="columnheader">dans le prototype</span>
+        </div>
+        {
+          goals.map((g) => (
+            <div class="a-goals__row" role="row">
+              <span role="cell">{g.k}</span>
+              <span role="cell" class="mute">{g.now}</span>
+              <span role="cell">{g.goal}</span>
+              <span role="cell" class:list={{ 'is-open': g.proto === 'À traiter' }}>
+                <i />
+                {g.proto}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="a-todo" data-rv>
+        <p class="small mute a-todo__label">pas encore dans les prototypes</p>
+        <ul>
+          {
+            todo.map((t) => (
+              <li>
+                <b>{t.t}</b>
+                <span>{t.d}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="a-cta" data-rv>
+        <div>
+          <p class="small mute-w">étape suivante</p>
+          <p class="a-cta__text">
+            Valider ce diagnostic ensemble, choisir les projets vedettes, puis dessiner l’accueil, Work et la fiche
+            projet.
+          </p>
+        </div>
+        <div class="a-cta__links">
+          {
+            versions.map((v) => (
+              <a class="a-cta__link" href={v.href}>
+                {v.label}
+                <i>→</i>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    root.classList.remove('is-loading');
+    root.classList.add('rv-on'); // reveals only hide content once this script runs
+
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }),
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    document.querySelectorAll('[data-rv]').forEach((el) => io.observe(el));
+
+    // hovering a pin lights up its legend line, and the other way round
+    document.querySelectorAll<HTMLElement>('[data-shot]').forEach((shot) => {
+      const light = (e: Event, on: boolean) => {
+        const k = (e.target as Element).closest<HTMLElement>('[data-pin]')?.dataset.pin;
+        if (k === undefined) return;
+        shot.querySelectorAll(`[data-pin="${k}"]`).forEach((el) => el.classList.toggle('is-hot', on));
+      };
+      shot.addEventListener('pointerover', (e) => light(e, true));
+      shot.addEventListener('pointerout', (e) => light(e, false));
+    });
+  </script>
+</Base>
