@@ -2,5 +2,7 @@
   // Static site: Cloudflare serves the Astro build as-is, no server code.
   "name": "strategie-agency",
   "compatibility_date": "2026-10-01",
+  // wrangler builds the site itself, so a deploy works without a separate build step
+  "build": { "command": "npm run build" },
   "assets": { "directory": "./dist" }
 }
