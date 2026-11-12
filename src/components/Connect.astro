@@ -1,0 +1,49 @@
+---
+import { clients, studio } from '../data/site';
+
+const loop = [...clients, ...clients];
+---
+
+<footer class="connect" id="connect" data-section="connect">
+  <canvas class="connect__wave" data-wave-lines data-dark aria-hidden="true"></canvas>
+
+  <div class="connect__clients">
+    <p class="small mute-w">they grew up with us</p>
+    <div class="marquee" role="img" aria-label={`clients: ${clients.join(', ')}`}>
+      <div class="marquee__track" aria-hidden="true">{loop.map((c) => <span>{c}</span>)}</div>
+    </div>
+  </div>
+
+  <a class="connect__title" href={`mailto:${studio.email}`} aria-label={`let's connect and grow, email ${studio.email}`}>
+    <span class="display" data-reveal>let’s connect<br />&amp; <span class="grad-text">grow</span></span>
+    <span class="connect__arrow" aria-hidden="true">→</span>
+  </a>
+
+  <div>
+    <div class="connect__cols small">
+      <div>
+        <p class="mute-w">studio</p>
+        <p>{studio.street}<br />{studio.city}</p>
+      </div>
+      <div>
+        <p class="mute-w">say hello</p>
+        <p>
+          <a class="u" href={`mailto:${studio.email}`}>{studio.email}</a><br />
+          <a class="u" href={studio.phoneHref}>{studio.phone}</a>
+        </p>
+      </div>
+      <div>
+        <p class="mute-w">follow</p>
+        <p>instagram<br />linkedin<br />facebook</p>
+      </div>
+      <div>
+        <p class="mute-w">local time</p>
+        <p class="tnum"><span data-clock>--:--:--</span> <span class="mute-w" data-tz>cet</span></p>
+      </div>
+    </div>
+    <div class="connect__bottom small mute-w">
+      <span>© strategie agency</span>
+      <span>concept prototype, not the live website</span>
+    </div>
+  </div>
+</footer>

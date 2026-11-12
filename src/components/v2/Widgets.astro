@@ -1,0 +1,50 @@
+---
+import { media, studio } from '../../data/site';
+
+const ticks = Array.from({ length: 12 }, (_, i) => i * 30);
+---
+
+<section class="d-bento" id="stratai" aria-label="studio widgets">
+  <article class="d-card d-card--dark d-clockcard">
+    <p class="w__label">hermée, be</p>
+    <svg class="clock" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="clock__face" cx="60" cy="60" r="58"></circle>
+      {ticks.map((deg) => <line class="clock__tick" x1="60" y1="6" x2="60" y2="11" transform={`rotate(${deg} 60 60)`} />)}
+      <line class="clock__h" x1="60" y1="60" x2="60" y2="32"></line>
+      <line class="clock__m" x1="60" y1="60" x2="60" y2="16"></line>
+      <line class="clock__s" x1="60" y1="70" x2="60" y2="12"></line>
+      <circle class="clock__pin" cx="60" cy="60" r="3"></circle>
+    </svg>
+    <div class="w__foot">
+      <span class="tnum" data-clock-short>--:--</span>
+      <span class="w__status" data-studio-status>studio closed</span>
+    </div>
+  </article>
+
+  <article class="d-card d-card--wide d-ai">
+    <div class="d-ai__copy">
+      <p class="small"><span class="live"><i></i>stratai · online</span></p>
+      <h2 class="d-ai__title">fueled by humans.<br /><span class="grad-text">powered by StratAI.</span></h2>
+      <p class="small mute">
+        StratAI enhances the way we build brands, accelerating analysis, widening exploration and helping decisions
+        land faster.
+      </p>
+      <button class="d-ai__ask" type="button" data-ask-open aria-haspopup="dialog">ask stratai <kbd>⌘K</kbd></button>
+    </div>
+    <div class="d-ai__stage">
+      <img class="d-ai__bot" src={media.stratai} alt="StratAI, the strategie robot" loading="lazy" />
+      <p class="d-ai__count">
+        <span class="tnum" data-ai-count>1,248</span>
+        <span class="small mute">insights today (demo)</span>
+      </p>
+    </div>
+  </article>
+
+  <article class="d-card d-card--grad d-hello">
+    <p class="w__label">say hello</p>
+    <p class="w__hello">let’s connect<br />&amp; grow</p>
+    <button class="btn" type="button" data-copy={studio.email}>
+      <span data-copy-label>{studio.email}</span><span class="btn__icon" aria-hidden="true">⧉</span>
+    </button>
+  </article>
+</section>

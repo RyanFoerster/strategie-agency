@@ -1,0 +1,43 @@
+---
+import { studio } from '../data/site';
+
+const links = [
+  { href: '#work', label: 'work' },
+  { href: '#about', label: 'about' },
+  { href: '#expertises', label: 'expertises' },
+  { href: '#stratai', label: 'stratai' },
+  { href: '#connect', label: 'connect' },
+];
+---
+
+<nav class="pill" aria-label="main">
+  <div class="pill__menu" id="pill-menu">
+    <div class="pill__menu-inner">
+      <ul class="pill__links">
+        {
+          links.map((l, i) => (
+            <li>
+              <a href={l.href}>
+                <span class="pill__idx mute">{String(i + 1).padStart(2, '0')}</span>
+                <span class="pill__lbl">{l.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="pill__foot small">
+        <a class="u" href={`mailto:${studio.email}`}>{studio.email}</a>
+        <span class="lang" aria-label="language">
+          <button type="button" class="is-active">en</button><button type="button">fr</button><button type="button">nl</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="pill__bar">
+    <a href="#top" class="pill__mark" aria-label="back to top"><span>S</span><img alt="" /></a>
+    <div class="pill__label" aria-live="polite"><span>showreel · scroll to explore</span></div>
+    <button class="pill__toggle" type="button" aria-expanded="false" aria-controls="pill-menu" aria-label="menu">
+      <span class="burger" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+</nav>

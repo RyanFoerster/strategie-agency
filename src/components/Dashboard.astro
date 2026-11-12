@@ -1,0 +1,108 @@
+---
+import { byslug, media, studio } from '../data/site';
+
+const latest = ['herta', 'promagnor', 'balade'].map(byslug);
+const ticks = Array.from({ length: 12 }, (_, i) => i * 30);
+---
+
+<div class="dash" data-dash aria-hidden="true">
+  <div class="dash__backdrop" data-dash-close></div>
+  <aside class="dash__panel" role="dialog" aria-modal="true" aria-label="studio dashboard" data-lenis-prevent>
+    <div class="dash__head small">
+      <span class="live"><i></i>strategie hq</span>
+      <span class="mute-w tnum" data-date></span>
+      <button class="dash__close" type="button" data-dash-close aria-label="close the dashboard">
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"
+          ><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg
+        >
+      </button>
+    </div>
+
+    <div class="dash__grid">
+      <article class="w w--clock">
+        <p class="w__label">hermée, be</p>
+        <svg class="clock" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="clock__face" cx="60" cy="60" r="58"></circle>
+          {ticks.map((deg) => <line class="clock__tick" x1="60" y1="6" x2="60" y2="11" transform={`rotate(${deg} 60 60)`} />)}
+          <line class="clock__h" x1="60" y1="60" x2="60" y2="32"></line>
+          <line class="clock__m" x1="60" y1="60" x2="60" y2="16"></line>
+          <line class="clock__s" x1="60" y1="70" x2="60" y2="12"></line>
+          <circle class="clock__pin" cx="60" cy="60" r="3"></circle>
+        </svg>
+        <div class="w__foot">
+          <span class="tnum" data-clock-short>--:--</span>
+          <span class="w__status" data-studio-status>studio closed</span>
+        </div>
+      </article>
+
+      <article class="w w--reel">
+        <video src={media.wave} muted loop playsinline preload="none" aria-hidden="true"></video>
+        <span class="chip chip--sm">now showing · brand film</span>
+        <span class="w__progress"><i></i></span>
+      </article>
+
+      <article class="w w--work">
+        <p class="w__label">latest work</p>
+        <ul>
+          {
+            latest.map((c) => (
+              <li>
+                <a href={c.href} target="_blank" rel="noopener">
+                  <img src={c.cover} alt="" loading="lazy" />
+                  <span>
+                    <b>{c.name}</b>
+                    <span>{c.line}</span>
+                  </span>
+                  <i aria-hidden="true">↗</i>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+
+      <article class="w w--ai">
+        <p class="w__label"><span class="live"><i></i>stratai</span></p>
+        <div>
+          <p class="w__big tnum" data-ai-count>1,248</p>
+          <p class="w__sub">insights processed today (demo)</p>
+        </div>
+        <svg class="spark" viewBox="0 0 200 46" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="spark-grad" x1="0" x2="1">
+              <stop offset="0" stop-color="#00c74c"></stop>
+              <stop offset="1" stop-color="#0089b2"></stop>
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 38 C 18 34, 28 18, 48 22 S 78 40, 100 28 S 138 6, 160 14 S 188 22, 200 6"
+            fill="none"
+            stroke="url(#spark-grad)"
+            stroke-width="2"
+            pathLength="1"></path>
+        </svg>
+      </article>
+
+      <article class="w w--jobs">
+        <p class="w__label">we’re hiring</p>
+        <p class="w__big">join<br />the roots.</p>
+        <div class="w__ticker" aria-hidden="true">
+          <div>
+            <span>open jobs</span><span>·</span><span>internships</span><span>·</span><span>spontaneous applications</span><span>·</span>
+            <span>open jobs</span><span>·</span><span>internships</span><span>·</span><span>spontaneous applications</span><span>·</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="w w--hello">
+        <div>
+          <p class="w__label">say hello</p>
+          <p class="w__hello">let’s connect<br />&amp; grow</p>
+        </div>
+        <button class="btn" type="button" data-copy={studio.email}>
+          <span data-copy-label>{studio.email}</span><span class="btn__icon" aria-hidden="true">⧉</span>
+        </button>
+      </article>
+    </div>
+  </aside>
+</div>

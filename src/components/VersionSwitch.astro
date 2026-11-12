@@ -1,0 +1,31 @@
+---
+// Demo bar: switch between the prototype versions and compare the transitions.
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const version = path.startsWith('/v4')
+  ? 'v4'
+  : path.startsWith('/v3')
+    ? 'v3'
+    : path.startsWith('/v2')
+      ? 'v2'
+      : 'v1';
+const versions = [
+  { id: 'v1', href: '/', label: 'v1 showreel' },
+  { id: 'v2', href: '/v2', label: 'v2 dashboard' },
+  { id: 'v3', href: '/v3', label: 'v3 connect' },
+  { id: 'v4', href: '/v4', label: 'v4 stratai' },
+];
+---
+
+<nav class="vswitch" aria-label="prototype versions">
+  {
+    versions.map((v) => (
+      <a href={v.href} class:list={{ 'is-active': v.id === version }} aria-current={v.id === version ? 'page' : undefined}>
+        {v.label}
+      </a>
+    ))
+  }
+  <hr />
+  <span class="vswitch__label">transition</span>
+  <button type="button" class="is-active" data-tmode="wave" aria-pressed="true">wave</button>
+  <button type="button" data-tmode="fade" aria-pressed="false">minimal</button>
+</nav>

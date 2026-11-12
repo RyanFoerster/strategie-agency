@@ -1,0 +1,49 @@
+---
+import { media } from '../data/site';
+
+const bars = [
+  { label: 'indulgence', v: 0.82 },
+  { label: 'everyday ritual', v: 0.64 },
+  { label: 'local roots', v: 0.47 },
+];
+---
+
+<section class="ai section" id="stratai" data-section="stratai">
+  <div class="ai__copy">
+    <div class="eyebrow small"><span class="dot"></span>stratai</div>
+    <h2 class="h1" data-reveal>fueled by humans.<br /><span class="grad-text">powered by StratAI.</span></h2>
+    <p class="lead ai__lead">
+      StratAI enhances the way we build brands, accelerating analysis, widening exploration and helping decisions land
+      faster.
+    </p>
+    <a class="btn" href="#connect" data-magnetic>
+      <span data-roll>talk to the team</span><span class="btn__icon" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <div class="ai__card" data-ai>
+    <div class="ai__head small">
+      <span class="live"><i></i>stratai · online</span>
+      <span class="mute">demo</span>
+    </div>
+    <div class="ai__stage">
+      <img class="ai__bot" src={media.stratai} alt="StratAI, the strategie robot" />
+    </div>
+    <p class="ai__q small"><span class="mute">brief</span>find new territories for a spread brand</p>
+    <p class="ai__a small" data-ai-type>
+      scanning 1,248 consumer reviews, 36 competitor packs and four years of social conversation…
+    </p>
+    <div class="ai__bars">
+      {
+        bars.map((b) => (
+          <div class="bar" style={`--v:${b.v}`}>
+            <span>{b.label}</span>
+            <i />
+            <b class="tnum">0%</b>
+          </div>
+        ))
+      }
+    </div>
+    <p class="ai__done small">3 territories ready for the team workshop <span class="grad-text">→</span></p>
+  </div>
+</section>

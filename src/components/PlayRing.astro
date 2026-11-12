@@ -1,0 +1,17 @@
+---
+// Round "play the reel" button with the duration turning around it.
+---
+
+<button class="playring" type="button" data-reel-play aria-label="play the showreel">
+  <svg class="playring__ring" viewBox="0 0 120 120" aria-hidden="true">
+    <defs>
+      <path id="playring-path" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path>
+    </defs>
+    <text>
+      <textPath href="#playring-path" textLength="284" lengthAdjust="spacing"
+        >play the reel · <tspan data-reel-duration>02:00</tspan> · play the reel · <tspan data-reel-duration>02:00</tspan> ·</textPath
+      >
+    </text>
+  </svg>
+  <span class="playring__core" aria-hidden="true"><i class="chip__play"></i></span>
+</button>

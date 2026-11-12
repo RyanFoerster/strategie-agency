@@ -1,0 +1,31 @@
+---
+// "you grow": a thin rail on the right edge fills as you go down the page,
+// one node per section (replaces the bottom nav pill).
+const sections = [
+  { href: '#top', label: 'showreel' },
+  { href: '#about', label: 'approach' },
+  { href: '#work', label: 'work' },
+  { href: '#expertises', label: 'expertises' },
+  { href: '#stratai', label: 'stratai' },
+  { href: '#connect', label: 'connect' },
+];
+const last = sections.length - 1;
+---
+
+<nav class="rail" aria-label="page sections">
+  <span class="rail__track" aria-hidden="true"></span>
+  <span class="rail__fill" aria-hidden="true"></span>
+  <ol class="rail__nodes">
+    {
+      sections.map((s, i) => (
+        <li style={`--y:${(i / last) * 100}%`}>
+          <a class="rail__node" href={s.href} data-rail-node>
+            <span class="rail__label">{s.label}</span>
+            <i class="rail__dot" aria-hidden="true" />
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="rail__pct tnum" aria-hidden="true"><span data-rail-pct>0</span>%</p>
+</nav>

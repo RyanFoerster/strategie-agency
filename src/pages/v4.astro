@@ -1,0 +1,30 @@
+---
+// v4: StratAI is the hero. Ask it something, it listens, thinks, answers,
+// and shows you the work. The rest of the page follows below.
+import Base from '../layouts/Base.astro';
+import Header from '../components/v4/Header.astro';
+import Stage from '../components/v4/Stage.astro';
+import Approach from '../components/Approach.astro';
+import Work from '../components/Work.astro';
+import Expertises from '../components/Expertises.astro';
+import Connect from '../components/Connect.astro';
+import ReelModal from '../components/ReelModal.astro';
+import '../styles/v4.css';
+---
+
+<Base title="strategie agency — ask StratAI (robot concept)">
+  <Header />
+  <main>
+    <Stage />
+    <Approach />
+    <Work />
+    <Expertises />
+  </main>
+  <Connect />
+  <ReelModal />
+  <div class="tether-label" aria-hidden="true"><span>see the story</span><span>↗</span></div>
+</Base>
+
+<script>
+  import '../scripts/v4/main.ts';
+</script>

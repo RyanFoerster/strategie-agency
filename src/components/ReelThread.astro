@@ -1,0 +1,24 @@
+---
+// "we connect": the projects of the reel sit on one living wave line.
+interface Props {
+  names: string[];
+}
+const { names } = Astro.props;
+---
+
+<div class="thread" data-thread>
+  <svg class="thread__svg" preserveAspectRatio="none" aria-hidden="true">
+    <path class="thread__base"></path>
+    <path class="thread__fill"></path>
+  </svg>
+  {
+    names.map((name, i) => (
+      <button class:list={['tnode', { 'is-active': i === 0 }]} type="button" data-node={i} aria-label={`go to ${name}`}>
+        <i class="tnode__dot" aria-hidden="true" />
+        <span class="tnode__label" aria-hidden="true">
+          {name}
+        </span>
+      </button>
+    ))
+  }
+</div>

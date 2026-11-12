@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Loader from '../components/Loader.astro';
+import Sidebar from '../components/v2/Sidebar.astro';
+import DashReel from '../components/v2/DashReel.astro';
+import Widgets from '../components/v2/Widgets.astro';
+import Approach from '../components/Approach.astro';
+import Expertises from '../components/Expertises.astro';
+import Connect from '../components/Connect.astro';
+import ReelModal from '../components/ReelModal.astro';
+import AskStratAI from '../components/AskStratAI.astro';
+import '../styles/v2.css';
+---
+
+<Base title="strategie agency — we connect, you grow (dashboard concept)">
+  <Loader />
+  <div class="d-shell">
+    <Sidebar />
+    <main class="d-main">
+      <DashReel />
+      <Widgets />
+      <Approach />
+      <Expertises />
+      <Connect />
+    </main>
+  </div>
+  <ReelModal />
+  <AskStratAI />
+</Base>
+
+<script>
+  import '../scripts/v2/main.ts';
+</script>

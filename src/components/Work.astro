@@ -1,0 +1,61 @@
+---
+import { byslug, totalProjects, CDN } from '../data/site';
+
+const grid = ['balade', 'ferrero-rocher', 'promagnor', 'nutella', 'herta', 'mc', 'vandemoortele', 'thomas-piron'].map(byslug);
+const layout = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+---
+
+<section class="work section" id="work" data-section="selected work">
+  <div class="work__head">
+    <h2 class="h1" data-reveal>selected work<sup class="mute">({totalProjects})</sup></h2>
+    <div class="filters" role="group" aria-label="filter projects">
+      <span class="filters__ind" aria-hidden="true"></span>
+      <button type="button" class="is-active" data-filter="all" aria-pressed="true">all</button>
+      <button type="button" data-filter="branding" aria-pressed="false">branding</button>
+      <button type="button" data-filter="communication" aria-pressed="false">communication</button>
+    </div>
+  </div>
+
+  <div class="work__grid">
+    {
+      grid.map((c, i) => (
+        <a
+          class={`card card--${layout[i]}`}
+          href={c.href}
+          target="_blank"
+          rel="noopener"
+          aria-label={`${c.name}, ${c.line}`}
+          data-card
+          data-cat={c.cat}
+          data-name={c.name}
+          data-line={c.line}
+          data-color={c.color}
+          data-ink={c.ink ?? '#ffffff'}
+        >
+          <div class="card__media">
+            <canvas class="card__canvas" aria-hidden="true" />
+            <img class="card__src" data-a src={c.cover} alt="" loading="lazy" decoding="async" />
+            {c.alt && <img class="card__src" data-b src={c.alt} alt="" loading="lazy" decoding="async" />}
+          </div>
+          <div class="card__meta">
+            <div>
+              <h3 class="card__name">{c.name}</h3>
+              <p class="card__line">{c.line}</p>
+            </div>
+            <div class="card__tags">
+              {c.tags.map((t) => (
+                <span class="tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="work__more">
+    <a class="btn" href={`${CDN}/en/work`} target="_blank" rel="noopener" data-magnetic>
+      <span data-roll>{`see all ${totalProjects} projects`}</span><span class="btn__icon" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>

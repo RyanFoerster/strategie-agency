@@ -1,0 +1,55 @@
+---
+import { media, studio } from '../../data/site';
+
+const links = [
+  { href: '#work', label: 'work' },
+  { href: '#about', label: 'about' },
+  { href: '#expertises', label: 'expertises' },
+  { href: '#stratai', label: 'stratai' },
+  { href: '#connect', label: 'connect' },
+];
+---
+
+<header class="hdr">
+  <a href="#top" class="hdr__logo" aria-label="strategie, back to top">Strategie</a>
+  <div class="hdr__right">
+    <button class="hdr__ask" type="button" data-ask-open aria-haspopup="dialog">
+      <img src={media.stratai} alt="" width="22" height="22" />
+      <span>ask stratai</span>
+      <kbd>/</kbd>
+    </button>
+    <span class="hdr__clock small tnum"><span class="city">hermée</span> <span data-clock>--:--:--</span></span>
+    <button
+      class="hdr__burger"
+      type="button"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="menu-sheet"
+      aria-label="menu"
+    >
+      <span class="burger" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<div class="msheet" id="menu-sheet" data-menu aria-hidden="true">
+  <ul class="msheet__links">
+    {
+      links.map((l, i) => (
+        <li>
+          <a href={l.href}>
+            <span class="msheet__idx">{String(i + 1).padStart(2, '0')}</span>
+            <span class="msheet__lbl">{l.label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="msheet__foot small">
+    <a class="u" href={`mailto:${studio.email}`}>{studio.email}</a>
+    <span class="lang" aria-label="language"
+      ><button type="button" class="is-active">en</button><button type="button">fr</button><button type="button">nl</button></span
+    >
+  </div>
+  <canvas class="msheet__wave" data-wave-lines aria-hidden="true"></canvas>
+</div>

@@ -1,0 +1,133 @@
+---
+// v2 sidebar: the whole portfolio as a "root system" (we connect, you grow).
+// A trunk line links every project; it fills in the brand gradient down to the
+// one playing in the hero. Search + branding / communication filters on top.
+import { byslug, featuredV2, portfolio, studio } from '../../data/site';
+
+const featuredSites = featuredV2.map((s) => byslug(s).site);
+const slideOf = (slug: string) => {
+  const i = featuredSites.indexOf(slug);
+  return i === -1 ? undefined : i + 1;
+};
+const count = {
+  all: portfolio.length,
+  branding: portfolio.filter((p) => p.cat !== 'communication').length,
+  communication: portfolio.filter((p) => p.cat !== 'branding').length,
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+const sections = [
+  { href: '#about', label: 'about' },
+  { href: '#expertises', label: 'expertises' },
+  { href: '#stratai', label: 'stratai' },
+  { href: '#connect', label: 'connect' },
+];
+---
+
+<aside class="d-side" aria-label="strategie, projects and studio">
+  <div class="d-side__top" style="--k:0">
+    <a href="#top" class="d-logo" aria-label="strategie, back to top">Strategie</a>
+    <span class="d-status small">
+      <i class="d-status__dot" data-studio-dot aria-hidden="true"></i>
+      <span>hermée</span>
+      <span class="tnum" data-clock-short>--:--</span>
+    </span>
+  </div>
+
+  <label class="d-search" style="--k:1">
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"
+      ><circle cx="7" cy="7" r="5.2" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path
+        d="M11 11l3.5 3.5"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"></path></svg
+    >
+    <input
+      type="search"
+      placeholder={`search ${count.all} projects or ask stratai`}
+      aria-label="search the projects"
+      autocomplete="off"
+      spellcheck="false"
+      data-search
+    />
+    <kbd aria-hidden="true">/</kbd>
+  </label>
+
+  <div class="filters d-filters" role="group" aria-label="filter projects" style="--k:2">
+    <span class="filters__ind" aria-hidden="true"></span>
+    <button type="button" class="is-active" data-filter="all" aria-pressed="true">all <sup>{count.all}</sup></button>
+    <button type="button" data-filter="branding" aria-pressed="false">branding <sup>{count.branding}</sup></button>
+    <button type="button" data-filter="communication" aria-pressed="false"
+      >communication <sup>{count.communication}</sup></button
+    >
+  </div>
+
+  <div class="d-listwrap" style="--k:3">
+    <ol class="d-tree" data-lenis-prevent aria-label="projects">
+      <li class="tr is-active is-open" data-slide="0" data-cat="all" data-name="showreel brand film 2026">
+        <a class="tr__row" href="#top">
+          <span class="tr__num tnum">00</span>
+          <span class="tr__name">showreel <span class="tr__sub">brand film</span></span>
+          <i class="tr__dot tr__dot--all" aria-hidden="true"></i>
+        </a>
+        <div class="tr__more">
+          <div class="tr__inner">
+            <span class="tr__thumb tr__thumb--brand" aria-hidden="true">
+              <svg viewBox="0 0 120 40" width="120" height="40"
+                ><path d="M4 26c18-22 30 10 50-6s30 6 62-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"
+                ></path><path
+                  d="M4 33c18-22 30 10 50-6s30 6 62-10"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-opacity=".45"
+                  stroke-width="1.5"
+                  stroke-linecap="round"></path></svg
+              >
+            </span>
+            <i class="tr__bar" aria-hidden="true"></i>
+          </div>
+        </div>
+      </li>
+      {
+        portfolio.map((p, i) => {
+          const slide = slideOf(p.slug);
+          return (
+            <li
+              class="tr"
+              data-cat={p.cat}
+              data-name={`${p.name} ${p.sub}`}
+              data-slide={slide}
+              data-preview={slide ? undefined : JSON.stringify({ name: p.name, sub: p.sub, src: p.img })}
+            >
+              <a class="tr__row" href={p.href} target="_blank" rel="noopener">
+                <span class="tr__num tnum">{pad(i + 1)}</span>
+                <span class="tr__name">
+                  {p.name} <span class="tr__sub">{p.sub}</span>
+                </span>
+                <i class={`tr__dot tr__dot--${p.cat}`} aria-hidden="true" title={p.cat} />
+              </a>
+              <div class="tr__more">
+                <div class="tr__inner">
+                  <img class="tr__thumb" data-src={p.img} alt="" decoding="async" />
+                  <i class="tr__bar" aria-hidden="true" />
+                </div>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ol>
+    <p class="d-empty small" data-empty hidden>nothing here yet. press enter to ask stratai.</p>
+  </div>
+
+  <div class="d-side__foot small" style="--k:4">
+    <nav class="d-nav" aria-label="sections">
+      {sections.map((s) => <a href={s.href}>{s.label}</a>)}
+    </nav>
+    <div class="d-side__meta">
+      <a class="u" href={`mailto:${studio.email}`}>{studio.email}</a>
+      <span class="lang" aria-label="language"
+        ><button type="button" class="is-active">en</button><button type="button">fr</button><button type="button">nl</button></span
+      >
+    </div>
+  </div>
+</aside>

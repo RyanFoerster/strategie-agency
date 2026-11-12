@@ -1,0 +1,57 @@
+---
+// "ask stratai": a command palette that answers a few questions and jumps around the site.
+import { media } from '../data/site';
+
+const items = [
+  { action: 'filter:branding', icon: '◐', label: 'show me branding & packaging work' },
+  { action: 'filter:communication', icon: '◑', label: 'show me campaigns & communication' },
+  { action: 'answer:what', icon: '?', label: 'what does strategie do?' },
+  { action: 'answer:stratai', icon: '✦', label: 'what is stratai?' },
+  { action: 'answer:clients', icon: '♥', label: 'who did you work with?' },
+  { action: 'reel', icon: '▶', label: 'play the showreel' },
+  { action: 'coffee', icon: '☕', label: 'book a coffee with the team' },
+  { action: 'goto:#connect', icon: '⌖', label: 'where is the studio?' },
+];
+---
+
+<div class="ask" data-ask aria-hidden="true">
+  <div class="ask__backdrop" data-ask-close></div>
+  <div class="ask__panel" role="dialog" aria-modal="true" aria-label="ask stratai">
+    <div class="ask__head">
+      <img class="ask__bot" src={media.stratai} alt="" width="40" height="40" />
+      <input
+        class="ask__input"
+        type="text"
+        placeholder="ask stratai or jump to…"
+        aria-label="ask stratai or jump to a section"
+        autocomplete="off"
+        spellcheck="false"
+        data-ask-input
+      />
+      <button class="ask__esc" type="button" data-ask-close aria-label="close">esc</button>
+    </div>
+    <div class="ask__answer small" data-ask-answer hidden>
+      <span class="live"><i></i></span>
+      <p data-ask-text></p>
+    </div>
+    <ul class="ask__list" role="listbox" aria-label="suggestions">
+      {
+        items.map((it, i) => (
+          <li
+            class:list={['ask__item', { 'is-active': i === 0 }]}
+            role="option"
+            aria-selected={i === 0 ? 'true' : 'false'}
+            data-action={it.action}
+          >
+            <span class="ask__ico" aria-hidden="true">
+              {it.icon}
+            </span>
+            <span class="ask__label">{it.label}</span>
+            <kbd aria-hidden="true">↵</kbd>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="ask__foot small">stratai demo · scripted answers for this prototype</p>
+  </div>
+</div>

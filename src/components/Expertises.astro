@@ -1,0 +1,47 @@
+---
+import { media, CDN } from '../data/site';
+
+const panels = [
+  {
+    n: '01',
+    title: 'branding',
+    video: media.branding,
+    href: `${CDN}/en/work?cat=branding`,
+    items: ['brand strategy', 'naming', 'visual identity', 'packaging', 'brand guidelines'],
+  },
+  {
+    n: '02',
+    title: 'communication',
+    video: media.communication,
+    href: `${CDN}/en/work?cat=communication`,
+    items: ['campaigns', 'social & content', 'photography', 'film', 'activation'],
+  },
+];
+---
+
+<section class="exp section" id="expertises" data-section="expertises">
+  <div class="exp__head">
+    <div class="eyebrow small"><span class="dot"></span>expertises</div>
+    <h2 class="h1" data-reveal>two expertises,<br /><span class="mute">one root system.</span></h2>
+  </div>
+  <div class="exp__panels">
+    {
+      panels.map((p) => (
+        <a class="panel" href={p.href} target="_blank" rel="noopener" data-panel>
+          <video src={p.video} muted loop playsinline preload="metadata" aria-hidden="true" />
+          <span class="panel__shade" aria-hidden="true" />
+          <span class="panel__top small">
+            <span>{p.n}</span>
+            <span class="panel__see">see the work ↗</span>
+          </span>
+          <h3 class="panel__title">{p.title}</h3>
+          <ul class="panel__list small">
+            {p.items.map((it, i) => (
+              <li style={`--i:${i}`}>{it}</li>
+            ))}
+          </ul>
+        </a>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,11 @@
+---
+import { media } from '../data/site';
+---
+
+<div class="rmodal" data-rmodal role="dialog" aria-modal="true" aria-label="strategie showreel" aria-hidden="true">
+  <video class="rmodal__video" src={media.branding} data-next={media.communication} playsinline controls preload="metadata"
+  ></video>
+  <button class="chip chip--btn rmodal__close" type="button" data-rmodal-close>
+    <span data-roll>close</span><span aria-hidden="true">×</span>
+  </button>
+</div>

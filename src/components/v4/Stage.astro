@@ -1,0 +1,83 @@
+---
+// v4 hero: StratAI, big, reacting to what you ask.
+import { byslug, media } from '../../data/site';
+
+const card = (slug: string) => {
+  const c = byslug(slug);
+  return { name: c.name, line: c.line, cover: c.cover, href: c.href };
+};
+const cards = {
+  branding: ['balade', 'promagnor', 'thomas-piron'].map(card),
+  communication: ['mcdonalds', 'ferrero-rocher', 'nutella', 'herta'].map(card),
+  all: ['balade', 'mcdonalds', 'ferrero-rocher', 'promagnor'].map(card),
+};
+
+const suggestions = [
+  { label: 'show me packaging work' },
+  { label: 'what does strategie do?' },
+  { label: 'who did you work with?' },
+  { label: 'play the showreel', reel: true },
+  { label: 'can we grab a coffee?' },
+  { label: 'who are you?' },
+  { label: 'tell me a joke' },
+];
+---
+
+<section class="stage" id="top" aria-label="ask stratai">
+  <div class="stage__glow" aria-hidden="true"></div>
+
+  <div class="stage__title">
+    <p class="eyebrow small"><span class="live"><i></i>stratai · online</span></p>
+    <h1 class="stage__h1">fueled by humans.<br /><span class="grad-text">powered by StratAI.</span></h1>
+    <p class="stage__lead">ask anything about strategie. the robot answers, the team does the rest.</p>
+  </div>
+
+  <div class="stage__cards" data-cards aria-live="polite"></div>
+
+  <div class="stage__bot">
+    <div class="bot" data-bot role="img" aria-label="StratAI, the strategie robot">
+      <div class="bot__shadow" aria-hidden="true"></div>
+      <div class="bot__float">
+        <div class="bot__rig" title="poke me">
+          <img class="bot__img" src={media.stratai} alt="" width="500" height="526" draggable="false" />
+          <canvas class="bot__visor" aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="bot__fx" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="stage__talk">
+    <div class="bubble" data-bubble aria-live="polite">
+      <p class="bubble__q small" data-bubble-q hidden></p>
+      <p class="bubble__a" data-bubble-a></p>
+    </div>
+  </div>
+
+  <div class="stage__bottom">
+    <div class="stage__chips">
+      {
+        suggestions.map((s) => (
+          <button type="button" class="schip" data-ask={s.label} data-reel-play={s.reel ? '' : undefined}>
+            {s.label}
+          </button>
+        ))
+      }
+    </div>
+    <form class="prompt" data-prompt autocomplete="off">
+      <img class="prompt__bot" src={media.stratai} alt="" width="40" height="42" />
+      <input
+        class="prompt__input"
+        type="text"
+        name="q"
+        placeholder="ask stratai anything…"
+        aria-label="ask stratai"
+        spellcheck="false"
+        data-input
+      />
+      <button class="prompt__send" type="submit" aria-label="send the question">→</button>
+    </form>
+  </div>
+
+  <script type="application/json" id="v4-cards" set:html={JSON.stringify(cards)} />
+</section>

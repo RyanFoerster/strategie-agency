@@ -1,0 +1,33 @@
+---
+import 'lenis/dist/lenis.css';
+import '../styles/global.css';
+import VersionSwitch from '../components/VersionSwitch.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'strategie agency — we connect, you grow',
+  description = 'Independent branding & communication agency. Creative homepage prototype.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="is-loading">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f3f0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://www.strategie.agency" />
+    <noscript><style>html.is-loading .hdr, html.is-loading .rail, html.is-loading .playring, html.is-loading .thread, html.is-loading .reel__bottom, html.is-loading .d-side > * { opacity: 1 !important; transform: none !important; translate: none !important; } .loader { display: none; }</style></noscript>
+  </head>
+  <body>
+    <slot />
+    <VersionSwitch />
+  </body>
+</html>

@@ -1,0 +1,37 @@
+---
+// v3: the showreel version with the "we connect, you grow" signature
+// (thread, growth rail, round menu, ask StratAI, hover tether).
+import Base from '../layouts/Base.astro';
+import Loader from '../components/Loader.astro';
+import Header from '../components/v3/Header.astro';
+import Showreel from '../components/v3/Showreel.astro';
+import GrowthRail from '../components/v3/GrowthRail.astro';
+import Approach from '../components/Approach.astro';
+import Work from '../components/Work.astro';
+import Expertises from '../components/Expertises.astro';
+import StratAI from '../components/StratAI.astro';
+import Connect from '../components/Connect.astro';
+import AskStratAI from '../components/AskStratAI.astro';
+import ReelModal from '../components/ReelModal.astro';
+---
+
+<Base title="strategie agency — we connect, you grow (connect concept)">
+  <Loader />
+  <Header />
+  <main>
+    <Showreel />
+    <Approach />
+    <Work />
+    <Expertises />
+    <StratAI />
+  </main>
+  <Connect />
+  <GrowthRail />
+  <AskStratAI />
+  <ReelModal />
+  <div class="tether-label" aria-hidden="true"><span>see the story</span><span>↗</span></div>
+</Base>
+
+<script>
+  import '../scripts/v3/main.ts';
+</script>
